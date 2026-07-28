@@ -1,0 +1,126 @@
+conky.config = {
+    -- MONITORAUSWAHL & POSITIONIERUNG
+    own_window_screen = 2,
+    alignment = 'top_left',
+    gap_x = 1350,
+    gap_y = 10,
+
+    -- SYSTEM & PERFORMANCE
+    background = true,
+    update_interval = 1.0,
+    total_run_times = 0,
+    cpu_avg_samples = 2,
+    net_avg_samples = 2,
+    diskio_avg_samples = 2,
+    no_buffers = true,
+    double_buffer = true,
+    uppercase = false,
+
+    -- FENSTER-EINSTELLUNGEN
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    own_window_argb_visual = false,
+    own_window_argb_value = 0,
+    own_window_colour = '000000',
+
+    -- ABMESSUNGEN & RÄNDER
+    minimum_width = 780,
+    maximum_width = 780,
+    minimum_height = 950,
+    border_inner_margin = 1,
+    border_outer_margin = 0,
+
+    -- SCHRIFT & GRAFIK
+    use_xft = true,
+    font = 'FreeSans:bold:size=9',
+    xftalpha = 0.8,
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = false,
+    draw_graph_borders = true,
+
+    -- FARBEN
+    default_color = 'white',
+    default_shade_color = 'black',
+    default_outline_color = 'white',  
+    color1 = 'green',
+    color2 = 'red',
+    color3 = 'orange'
+}
+
+conky.text = [[
+# ==================== BLOCK 1: SYSTEM DETAILS & NUTZER ====================
+${execi 1800 curl -s --max-time 3 "de.wttr.in/Bielefeld?format=%C+%t|%w|%p" -o /tmp/wttr.txt 2>/dev/null}
+${color #86BE43}${font FontAwesome:size=11}${font FreeSans:bold:size=10}  SYSTEM DETAILS & NUTZER BOBELLE™$color${goto 410}${color #86BE43}${font FontAwesome:size=11}${font FreeSans:bold:size=10}  WETTER & ORT$color${font}
+${color #333333}${hr 1}$color
+${font Sans:size=18:bold}${time %H:%M:%S}${font} ${goto 120}${time %a, %d. %b %Y}${goto 410}${color #A0A0A0}Ort:${goto 520}${color white}Bielefeld
+${color #A0A0A0}O.S.:${goto 120}${color white}${execi 999999 lsb_release -ds | tr -d '"\n' || echo "Linux Mint"}${goto 410}${color #A0A0A0}Wetter:${goto 520}${color white}${execi 10 cut -d'|' -f1 /tmp/wttr.txt 2>/dev/null || echo "N/A"}
+${color #A0A0A0}Laufzeit:${goto 120}${color white}$uptime${goto 410}${color #A0A0A0}Wind:${goto 520}${color white}${execi 10 cut -d'|' -f2 /tmp/wttr.txt 2>/dev/null || echo "N/A"}
+${color #A0A0A0}Hostname:${goto 120}${color white}$nodename${goto 410}${color #A0A0A0}Niederschlag:${goto 520}${color white}${execi 10 cut -d'|' -f3 /tmp/wttr.txt 2>/dev/null || echo "N/A"}
+${color #A0A0A0}Kernel:${goto 120}${color white}${kernel}
+${color #A0A0A0}Updates:${goto 120}${if_match ${execi 100 apt-get check >/dev/null 2>&1; mintupdate-cli list 2>/dev/null | grep -c '^[a-zA-Z0-9]'} > 0}${color #86BE43}${execi 100 mintupdate-cli list 2>/dev/null | grep -c '^[a-zA-Z0-9]'} Update(s) verfügbar$color${else}${color white}0 (System aktuell)$color${endif}
+${color #A0A0A0}Flatpak-Updates:${goto 120}${if_match ${execi 100 flatpak remote-ls --updates 2>/dev/null | wc -l} > 0}${color green}${execi 100 flatpak remote-ls --updates 2>/dev/null | wc -l} Update(s) verfügbar$color${else}${color white}0 (Aktuell)$color${endif}${goto 410}${color #A0A0A0}Lautstärke:${goto 700}${color #A0A0A0}${execi 1 pactl get-sink-volume @DEFAULT_SINK@ 2>/dev/null | head -n1 | awk '{print $5}'}${goto 550}${color #A0A0A0}${execibar 1 4,120 pactl get-sink-volume @DEFAULT_SINK@ 2>/dev/null | head -n1 | awk '{print $5}' | tr -d '%'}$color
+# ==================== BLOCK 2: CPU & PROZESSE ====================
+${voffset 10}${color #86BE43}${font FontAwesome:size=11}${font FreeSans:bold:size=10}  CPU AUSLASTUNG (ATHLON X4 845 @ ${freq_g cpu0} GHz)$color${goto 410}${color #86BE43}${font FontAwesome:size=11}${font FreeSans:bold:size=10}  TOP PROZESSE$color${font}
+${color #333333}${hr 1}$color
+${color #A0A0A0}Leitstellenspiel:${goto 105}${if_match "${execi 5 xwininfo -root -children 2>/dev/null | grep -i 'leitstellenspiel' | wc -l}" > "0"}${color green}o.K läuft$color${else}${color2}Inaktiv$color${endif}${goto 270}${color #A0A0A0}Rettungssimulator:${goto 390}${if_match "${execi 5 xwininfo -root -children 2>/dev/null | grep -i 'rettungssimulator' | wc -l}" > "0"}${color green}o.K läuft$color${else}${color2}Inaktiv$color${endif}${goto 540}${color #A0A0A0}0 A.D. Game:${goto 625}${if_running pyrogenesis}${color green}o.K läuft$color${else}${color2}Inaktiv$color${endif}
+${goto 700}${color2}
+${color #A0A0A0}Kern 1:$color ${cpu cpu1}% ${goto 95}${color #86BE43}${cpubar cpu1 4,240}$color${goto 410}${if_match ${top cpu 1} > 50}${color red}${else}${color white}${endif}${top name 1}${goto 720}${top cpu 1}%$color
+${color #A0A0A0}Kern 2:$color ${cpu cpu2}% ${goto 95}${color #86BE43}${cpubar cpu2 4,240}$color${goto 410}${if_match ${top cpu 2} > 50}${color red}${else}${color white}${endif}${top name 2}${goto 720}${top cpu 2}%$color
+${color #A0A0A0}Kern 3:$color ${cpu cpu3}% ${goto 95}${color #86BE43}${cpubar cpu3 4,240}$color${goto 410}${if_match ${top cpu 3} > 50}${color red}${else}${color white}${endif}${top name 3}${goto 720}${top cpu 3}%$color
+${color #A0A0A0}Kern 4:$color ${cpu cpu4}% ${goto 95}${color #86BE43}${cpubar cpu4 4,240}$color${goto 410}${if_match ${top cpu 4} > 50}${color red}${else}${color white}${endif}${top name 4}${goto 720}${top cpu 4}%$color
+${color #A0A0A0}CPU Status:${goto 95}${if_match ${cpu cpu0} > 80}${color red}HOCH (${cpu cpu0}%)${else}${if_match ${cpu cpu0} > 50}${color yellow}MITTEL (${cpu cpu0}%)${else}${color #86BE43}NORMAL (${cpu cpu0}%)${endif}${endif}$color${goto 410}${color #A0A0A0}Insgesamt:${goto 520}${if_match $running_processes > 0}${color1}$running_processes$color${else}${color white}0${endif} / $processes Prozesse
+# ==================== BLOCK 3: GRAFIKKARTE & GPU DETAILS ====================
+${voffset 10}${color #86BE43}${font FontAwesome:size=11}${font FreeSans:bold:size=10}  GPU AUSLASTUNG & VRAM$color${goto 410}${color #86BE43}${font FontAwesome:size=11}${font FreeSans:bold:size=10}  HARDWARE & TREIBER$color${font}
+${color #333333}${hr 1}$color
+${color #A0A0A0}GPU Load:${goto 95}${color white}${execi 5 nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits 2>/dev/null | tr -d '\n' || echo "0"}%${goto 410}${color #A0A0A0}GPU Modell:${goto 540}${color white}${execi 3600 nvidia-smi --query-gpu=gpu_name --format=csv,noheader 2>/dev/null | tr -d '\n' || echo "NVIDIA"}
+${color #86BE43}${execibar 5 4,350 nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits 2>/dev/null || echo "0"}$color${goto 410}${color #A0A0A0}Treiber:${goto 540}${color white}${execi 3600 nvidia-smi --query-gpu=driver_version --format=csv,noheader 2>/dev/null | tr -d '\n' || echo "N/A"}
+${color #A0A0A0}VRAM Nutzg:${goto 95}${color white}${execi 5 nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits 2>/dev/null | tr -d '\n' || echo "0"} / ${execi 3600 nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits 2>/dev/null | tr -d '\n' || echo "2048"} MB${goto 410}${color #A0A0A0}GPU Clock:${goto 540}${color white}${execi 5 nvidia-smi --query-gpu=clocks.gr --format=csv,noheader,nounits 2>/dev/null | tr -d '\n' || echo "0"} MHz
+${color dimgrey}${execibar 5 4,350 nvidia-smi --query-gpu=utilization.memory --format=csv,noheader,nounits 2>/dev/null || echo "0"}$color${goto 410}${color #A0A0A0}Mainboard:${goto 540}${color white}${execi 3600 cat /sys/class/dmi/id/board_name 2>/dev/null | tr -d '\n' || echo "N/A"}
+# ==================== BLOCK 4: SPEICHER & LAUFWERKE ====================
+${voffset 10}${color #86BE43}${font FontAwesome:size=11}${font FreeSans:bold:size=10}  RAM & SWAP SPEICHER$color${goto 410}${color #86BE43}${font FontAwesome:size=11}${font FreeSans:bold:size=10}  SSD / USB LAUFWERKE$color${font}
+${color #333333}${hr 1}$color
+${color #A0A0A0}RAM:${goto 95}${color white}$mem / $memmax (${memperc}%)${goto 410}${color #A0A0A0}Home/Root:${goto 540}${color white}${fs_used /home/bobelle} / ${fs_size /home/bobelle} (${fs_used_perc /home/bobelle}%)
+${color dimgrey}${membar 4,350}$color${goto 410}${color dimgrey}${fs_bar 4,350 /home/bobelle}$color
+${color #A0A0A0}SWAP:${goto 95}${color white}$swap / $swapmax (${swapperc}%)${goto 410}${color #A0A0A0}Data Server:${goto 540}${color white}${fs_used /Data} / ${fs_size /Data} (${fs_used_perc /Data}%)
+${color dimgrey}${swapbar 4,350}$color${goto 410}${color dimgrey}${fs_bar 4,350 /Data}$color
+${color #A0A0A0}RAM Status:${goto 95}${if_match ${memperc} > 85}${color red}KRITISCH (${memperc}%)${else}${if_match ${memperc} > 50}${color yellow}ERHÖHT (${memperc}%)${else}${color #86BE43}OPTIMAL (${memperc}%)${endif}${endif}$color${goto 410}${if_mounted /media/bobelle/USB-BACKUP}${color #A0A0A0}USB Backup:${goto 540}${color white}${fs_used /media/bobelle/USB-BACKUP} / ${fs_size /media/bobelle/USB-BACKUP} (${fs_used_perc /media/bobelle/USB-BACKUP}%)$color
+${color dimgrey}${goto 410}${fs_bar 4,350 /media/bobelle/USB-BACKUP}$color${else}${color #A0A0A0}USB Backup:${goto 540}${color dimgrey}Nicht angeschlossen$color${endif}
+# ==================== BLOCK 5: DISK IO & NETZWERK TRAFFIC ====================
+${voffset 10}${color #86BE43}${font FontAwesome:size=11}${font FreeSans:bold:size=10}  SSD AKTIVITÄT$color${goto 410}${color #86BE43}${font FontAwesome:size=11}${font FreeSans:bold:size=10}  NETZWERK TRAFFIC$color${font}
+${color #333333}${hr 1}$color
+${color #A0A0A0}Lesen:${goto 95}${color white}${diskio_read}${goto 410}${color #A0A0A0}Download:${goto 520}${color white}${downspeedf wlx002e2d3068f0} kb/s (Gesamt: ${totaldown wlx002e2d3068f0})
+${color #86BE43}${diskiograph_read 16,350 86BE43 ff0000}$color${goto 410}${color #86BE43}${downspeedgraph wlx002e2d3068f0 16,350}$color
+${color #A0A0A0}Schreiben:${goto 95}${color white}${diskio_write}${goto 410}${color #A0A0A0}Upload:${goto 520}${color white}${upspeedf wlx002e2d3068f0} kb/s (Gesamt: ${totalup wlx002e2d3068f0})
+${color red}${diskiograph_write 16,350 86BE43 ff0000}$color${goto 410}${color red}${upspeedgraph wlx002e2d3068f0 16,350}$color
+# ==================== BLOCK 6: WLAN & NETZWERK ====================
+${voffset 10}${color #86BE43}${font FontAwesome:size=11}${font FreeSans:bold:size=10}  WLAN, NETZWERK & TRAFFIC$color${font}
+${color #333333}${hr 1}$color
+${color #A0A0A0}Router SSID:${goto 140}${color white}${execi 10 iwconfig wlx002e2d3068f0 2>/dev/null | grep 'ESSID:' | awk -F'ESSID:' '{print $2}' | tr -d '"' || echo "N/A"}${goto 410}${color #A0A0A0}WLAN Link Speed:${goto 540}${color white}${execi 10 iwconfig wlx002e2d3068f0 2>/dev/null | grep 'Bit Rate' | awk '{print $2 " " $3}' | cut -d'=' -f2 || echo "N/A"}
+${color #A0A0A0}Status:${goto 140}${if_up wlx002e2d3068f0}${color #86BE43}Aktiv / Verbunden$color${else}${color red}Inaktiv / Getrennt$color${endif}${goto 410}${color #A0A0A0}Lokale IP:${goto 540}${color white}${addr wlx002e2d3068f0}
+${color #A0A0A0}WLan Signal:${goto 140}${color white}${wireless_link_qual_perc wlx002e2d3068f0}% ${if_match ${wireless_link_qual_perc wlx002e2d3068f0} >= 80}${color #86BE43}${else}${color red}${endif}${wireless_link_bar 4,100 wlx002e2d3068f0}$color${goto 410}${color #A0A0A0}Gateway:${goto 540}${color white}${execi 3600 ip route | grep default | awk '{print $3}' || echo "N/A"}
+${color #A0A0A0}Traffic Heute:${goto 140}${color orange}${execi 180 vnstat -i wlx002e2d3068f0 -d --oneline 2>/dev/null | awk -F';' '{print $6}' || echo "0 MiB"}${goto 410}${color #A0A0A0}Monats-Traffic:${goto 540}${color orange}${execi 300 vnstat -i wlx002e2d3068f0 -m --oneline 2>/dev/null | awk -F';' '{print $11}' || echo "0 GiB"}
+${color #A0A0A0}USB-WLAN Typ:${goto 140}${color white}${execi 3600 lsusb -d $(cat /sys/class/net/wlx002e2d3068f0/device/modalias 2>/dev/null | cut -d: -f2 | cut -c1-9 | tr 'v' ':' | tr -d 'p') 2>/dev/null | cut -d' ' -f7-12 || echo "Realtek/Generic USB"}${goto 410}${color #A0A0A0}USB Bus-Mode:${goto 540}${color white}${execi 3600 cat /sys/class/net/wlx002e2d3068f0/device/speed 2>/dev/null || echo "480"} Mbit/s
+# ==================== BLOCK 7: SYSTEM GESUNDHEIT & LATENZ ====================
+${voffset 10}${color #86BE43}${font FontAwesome:size=11}${font FreeSans:bold:size=10}  SYSTEM GESUNDHEIT & LATENZ$color${font}
+${color #333333}${hr 1}$color
+${color #A0A0A0}Ping (Internet):${goto 140}${color white}${execi 10 ping -c 1 1.1.1.1 2>/dev/null | grep 'time=' | awk -F'time=' '{print $2}' || echo "Offline"}${goto 410}${color #A0A0A0}Defekte Services:${goto 540}${if_match ${execi 60 systemctl --failed --quiet | wc -l} > 0}${color red}${execi 60 systemctl --failed --quiet | wc -l} Dienst(e)${else}${color #86BE43}0 (Alles OK)${endif}$color
+${color #A0A0A0}Aktive Sockets:${goto 140}${color white}${execi 30 ss -s 2>/dev/null | grep 'estab' | awk '{print $4}' | tr -d ',' || echo "0"}${goto 410}${color #A0A0A0}Cinnamon RAM:${goto 540}${color white}${execi 10 ps aux | grep 'cinnamon' | grep -v 'grep' | head -n1 | awk '{print int($6/1024)}'} MiB
+# ==================== BLOCK 8: USB HARDWARE ÜBERSICHT ====================
+${voffset 10}${color #86BE43}${font FontAwesome:size=11}${font FreeSans:bold:size=10}  ANGESCHLOSSENE USB-GERÄTE ($color${execi 10 lsusb | grep -v "Linux Foundation" | wc -l} extern$color${color #86BE43})$color${font}
+${color #333333}${hr 1}$color
+${if_match "${execi 15 lsusb | grep -v 'Linux Foundation' | sed -n '1p'}" != ""}${color #86BE43}USB 01:$color ${color white}${execi 15 lsusb | grep -v 'Linux Foundation' | awk '{for(i=7;i<=NF;i++) printf $i " "; print ""}' | sed -n '1p' | cut -c1-18}${endif}${goto 270}${if_match "${execi 15 lsusb | grep -v 'Linux Foundation' | sed -n '3p'}" != ""}${color #86BE43}USB 03:$color ${color white}${execi 15 lsusb | grep -v 'Linux Foundation' | awk '{for(i=7;i<=NF;i++) printf $i " "; print ""}' | sed -n '3p' | cut -c1-18}${endif}${goto 540}${if_match "${execi 15 lsusb | grep -v 'Linux Foundation' | sed -n '5p'}" != ""}${color #86BE43}USB 05:$color ${color white}${execi 15 lsusb | grep -v 'Linux Foundation' | awk '{for(i=7;i<=NF;i++) printf $i " "; print ""}' | sed -n '5p' | cut -c1-18}${endif}
+${if_match "${execi 15 lsusb | grep -v 'Linux Foundation' | sed -n '2p'}" != ""}${color #86BE43}USB 02:$color ${color white}${execi 15 lsusb | grep -v 'Linux Foundation' | awk '{for(i=7;i<=NF;i++) printf $i " "; print ""}' | sed -n '2p' | cut -c1-18}${endif}${goto 270}${if_match "${execi 15 lsusb | grep -v 'Linux Foundation' | sed -n '4p'}" != ""}${color #86BE43}USB 04:$color ${color white}${execi 15 lsusb | grep -v 'Linux Foundation' | awk '{for(i=7;i<=NF;i++) printf $i " "; print ""}' | sed -n '4p' | cut -c1-18}${endif}${goto 540}${if_match "${execi 15 lsusb | grep -v 'Linux Foundation' | sed -n '6p'}" != ""}${color #86BE43}USB 06:$color ${color white}${execi 15 lsusb | grep -v 'Linux Foundation' | awk '{for(i=7;i<=NF;i++) printf $i " "; print ""}' | sed -n '6p' | cut -c1-18}${endif}
+#${hr 1}
+
+# ==================== BLOCK 8: NEXTCLOUD & GOOGLE DRIVE ====================
+${color white}Nextcloud:${color} ${goto 120}${if_running nextcloud}${color green}● Aktiv${else}${color red}○ Inaktiv${endif}${color } ${goto 220}(398 Dateien) ${goto 380}${color white}Google Drive:${color green} ${goto 500}${execi 5 gio mount -l 2>/dev/null | grep -q -i google && echo "● Mount" || echo"○ Inaktiv"}${color} ${goto 620}(398 Dateien)
+${color white}Letzter Sync: ${goto 120}${exec date -r /home/bobelle/Nextcloud "+%d.%m.%Y %H:%M"} ${goto 380}${color white}Letzter Sync:${color} ${goto 500}${execi 10 D=$(ls -d /run/user/1000/gvfs/google-drive* 2>/dev/null); if [ -n "$D" ]; then date -r "$D" "+%d.%m.%Y %H:%M"; else echo "Inaktiv"; fi}
+${color white}Dropbox:${color} ${goto 120}${if_running dropbox}${color green}● Aktiv${color}${else}${color red}○ Inaktiv${color}${endif} ${goto 220}(373 Dateien) ${goto 380}${color white}Mega Cloud:${color} ${goto 500}${if_running megasync}${color green}● Aktiv${else}${color red}○ Inaktiv${endif}${color} ${goto 620}(465 Dateien)
+${color white}Letzter Sync:${color} ${goto 120}${exec date -r /home/bobelle/Dropbox "+%d.%m.%Y %H:%M"} ${goto 380}${color white}Letzter Sync:${color} ${goto 500}${exec date -r /home/bobelle "+%d.%m.%Y %H:%M"}
+
+
+
+]]

@@ -1,0 +1,306 @@
+conky.config = {
+    -- MONITORAUSWAHL & POSITIONIERUNG
+    own_window_screen = 2,
+    alignment = 'top_left',
+    gap_x = 1350,
+    gap_y = 80,
+
+    -- SYSTEM & PERFORMANCE
+    background = true,
+    update_interval = 1.0,
+    total_run_times = 0,
+    cpu_avg_samples = 2,
+    net_avg_samples = 2,
+    diskio_avg_samples = 2,
+    no_buffers = true,
+    double_buffer = true,
+    uppercase = false,
+
+    -- FENSTER-EINSTELLUNGEN
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    own_window_argb_visual = false,
+    own_window_argb_value = 0,
+    own_window_colour = '000000',
+
+    -- ABMESSUNGEN & RÄNDER
+    minimum_width = 780,
+    maximum_width = 780,
+    minimum_height = 800,
+    border_inner_margin = 1,
+    border_outer_margin = 0,
+
+    -- SCHRIFT & GRAFIK
+    use_xft = true,
+    font = 'FreeSans:bold:size=9',
+    xftalpha = 0.8,
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = false,
+    draw_graph_borders = true,
+
+    -- FARBEN
+    default_color = 'white',
+    default_shade_color = 'black',
+    default_outline_color = 'white',
+    color1 = 'orange',
+}
+
+conky.config = {
+    -- MONITORAUSWAHL & POSITIONIERUNG
+    own_window_screen = 2,
+    alignment = 'top_left',
+    gap_x = 1350,
+    gap_y = 80,
+
+    -- SYSTEM & PERFORMANCE
+    background = true,
+    update_interval = 1.0,
+    total_run_times = 0,
+    cpu_avg_samples = 2,
+    net_avg_samples = 2,
+    diskio_avg_samples = 2,
+    no_buffers = true,
+    double_buffer = true,
+    uppercase = false,
+
+    -- FENSTER-EINSTELLUNGEN
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    own_window_argb_visual = false,
+    own_window_argb_value = 0,
+    own_window_colour = '000000',
+
+    -- ABMESSUNGEN & RÄNDER
+    minimum_width = 780,
+    maximum_width = 780,
+    minimum_height = 800,
+    border_inner_margin = 1,
+    border_outer_margin = 0,
+
+    -- SCHRIFT & GRAFIK
+    use_xft = true,
+    font = 'FreeSans:bold:size=9',
+    xftalpha = 0.8,
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = false,
+    draw_graph_borders = true,
+
+    -- FARBEN
+    default_color = 'white',
+    default_shade_color = 'black',
+    default_outline_color = 'white',
+    color1 = 'orange',
+}
+
+conky.config = {
+    -- MONITORAUSWAHL & POSITIONIERUNG
+    own_window_screen = 2,
+    alignment = 'top_left',
+    gap_x = 1350,
+    gap_y = 80,
+
+    -- SYSTEM & PERFORMANCE
+    background = true,
+    update_interval = 1.0,
+    total_run_times = 0,
+    cpu_avg_samples = 2,
+    net_avg_samples = 2,
+    diskio_avg_samples = 2,
+    no_buffers = true,
+    double_buffer = true,
+    uppercase = false,
+
+    -- FENSTER-EINSTELLUNGEN
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    own_window_argb_visual = false,
+    own_window_argb_value = 0,
+    own_window_colour = '000000',
+
+    -- ABMESSUNGEN & RÄNDER
+    minimum_width = 780,
+    maximum_width = 780,
+    minimum_height = 800,
+    border_inner_margin = 1,
+    border_outer_margin = 0,
+
+    -- SCHRIFT & GRAFIK
+    use_xft = true,
+    font = 'FreeSans:bold:size=9',
+    xftalpha = 0.8,
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = false,
+    draw_graph_borders = true,
+
+    -- FARBEN
+    default_color = 'white',
+    default_shade_color = 'black',
+    default_outline_color = 'white',
+    color1 = 'orange',
+}
+
+conky.config = {
+    -- MONITORAUSWAHL & POSITIONIERUNG
+    own_window_screen = 2,
+    alignment = 'top_left',
+    gap_x = 1350,
+    gap_y = 80,
+
+    -- SYSTEM & PERFORMANCE
+    background = true,
+    update_interval = 1.0,
+    total_run_times = 0,
+    cpu_avg_samples = 2,
+    net_avg_samples = 2,
+    diskio_avg_samples = 2,
+    no_buffers = true,
+    double_buffer = true,
+    uppercase = false,
+
+    -- FENSTER-EINSTELLUNGEN
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    own_window_argb_visual = false,
+    own_window_argb_value = 0,
+    own_window_colour = '000000',
+
+    -- ABMESSUNGEN & RÄNDER
+    minimum_width = 780,
+    maximum_width = 780,
+    minimum_height = 800,
+    border_inner_margin = 1,
+    border_outer_margin = 0,
+
+    -- SCHRIFT & GRAFIK
+    use_xft = true,
+    font = 'FreeSans:bold:size=9',
+    xftalpha = 0.8,
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = false,
+    draw_graph_borders = true,
+
+    -- FARBEN
+    default_color = 'white',
+    default_shade_color = 'black',
+    default_outline_color = 'white',
+    color1 = 'orange',
+}
+
+conky.config = {
+    -- MONITORAUSWAHL & POSITIONIERUNG
+    own_window_screen = 2,
+    alignment = 'top_left',
+    gap_x = 1350,
+    gap_y = 80,
+
+    -- SYSTEM & PERFORMANCE
+    background = true,
+    update_interval = 1.0,
+    total_run_times = 0,
+    cpu_avg_samples = 2,
+    net_avg_samples = 2,
+    diskio_avg_samples = 2,
+    no_buffers = true,
+    double_buffer = true,
+    uppercase = false,
+
+    -- FENSTER-EINSTELLUNGEN
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    own_window_argb_visual = false,
+    own_window_argb_value = 0,
+    own_window_colour = '000000',
+
+    -- ABMESSUNGEN & RÄNDER
+    minimum_width = 780,
+    maximum_width = 780,
+    minimum_height = 800,
+    border_inner_margin = 1,
+    border_outer_margin = 0,
+
+    -- SCHRIFT & GRAFIK
+    use_xft = true,
+    font = 'FreeSans:bold:size=9',
+    xftalpha = 0.8,
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = false,
+    draw_graph_borders = true,
+
+    -- FARBEN
+    default_color = 'white',
+    default_shade_color = 'black',
+    default_outline_color = 'white',
+    color1 = 'orange',
+}
+
+conky.text = [[
+# Wetter-Cache im Hintergrund (alle 30 Min)
+${execi 1800 curl -s --max-time 3 "de.wttr.in/Bielefeld?format=%C+%t|%w|%p" -o /tmp/wttr.txt 2>/dev/null}
+# ==================== BLOCK 1: SYSTEM & WETTER ====================
+${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} Nutzer Bobelle™$color${goto 260}${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} System Details$color${goto 520}${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} Wetter & Ort$color${font}
+${color dimgrey}${hr 1}$color
+${font Sans:size=11:bold}${time %H:%M:%S}${font}${goto 260}O.S.:${goto 350}${execi 999999 lsb_release -ds | tr -d '"\n' || echo "Linux Mint"}${goto 520}Ort:${goto 620}Bielefeld
+${time %a, %d. %b %Y}${goto 260}Laufzeit:${goto 350}$uptime${goto 520}Wetter:${goto 620}${execi 10 cut -d'|' -f1 /tmp/wttr.txt 2>/dev/null || echo "N/A"}
+Hostname:${goto 90}$nodename${goto 260}Architektur:${goto 350}$machine${goto 520}Wind:${goto 620}${execi 10 cut -d'|' -f2 /tmp/wttr.txt 2>/dev/null || echo "N/A"}
+Kernel:${goto 90}${kernel}${goto 260}Updates:${goto 350}${execi 3600 apt list --upgradable 2>/dev/null | grep -c 'upgradable'} Verfügbar${goto 520}Niederschlag:${goto 620}${execi 10 cut -d'|' -f3 /tmp/wttr.txt 2>/dev/null || echo "N/A"}
+
+# ==================== BLOCK 2: CPU, PROZESSE & GPU ====================
+${voffset 10}${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} CPU$color${goto 260}${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} Prozesse (Top CPU)$color${goto 520}${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} GPU & VRAM Details$color${font}
+${color dimgrey}${hr 1}$color
+Athlon X4 845${goto 170}${freq_g cpu0} GHz${goto 260}${if_match ${top cpu 1} > 50}${color red}${else}${color white}${endif}${top name 1}${goto 450}${top cpu 1}%$color${goto 520}GPU Load:${goto 620}${execi 5 nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits 2>/dev/null | tr -d '\n' || echo "0"}%
+Kern 1: ${cpu cpu1}% ${goto 100}${color green}${cpubar cpu1 8,140}$color${goto 260}${if_match ${top cpu 2} > 50}${color red}${else}${color white}${endif}${top name 2}${goto 450}${top cpu 2}%$color${goto 520}${color green}${execibar 5 8,240 nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits 2>/dev/null || echo "0"}$color
+Kern 2: ${cpu cpu2}% ${goto 100}${color red}${cpubar cpu2 8,140}$color${goto 260}${if_match ${top cpu 3} > 50}${color red}${else}${color white}${endif}${top name 3}${goto 450}${top cpu 3}%$color${goto 520}VRAM:${goto 620}${execi 5 nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits 2>/dev/null | tr -d '\n' || echo "0"} / ${execi 3600 nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits 2>/dev/null | tr -d '\n' || echo "2048"} MB
+Kern 3: ${cpu cpu3}% ${goto 100}${color orange}${cpubar cpu3 8,140}$color${goto 260}${if_match ${top cpu 4} > 50}${color red}${else}${color white}${endif}${top name 4}${goto 450}${top cpu 4}%$color${goto 520}${color grey}${execibar 5 8,240 nvidia-smi --query-gpu=utilization.memory --format=csv,noheader,nounits 2>/dev/null || echo "0"}$color
+Kern 4: ${cpu cpu4}% ${goto 100}${color yellow}${cpubar cpu4 8,140}$color${goto 260}Insgesamt:${goto 430}$running_processes / $processes${goto 520}GPU Clock:${goto 620}${execi 5 nvidia-smi --query-gpu=clocks.gr --format=csv,noheader,nounits 2>/dev/null | tr -d '\n' || echo "0"} MHz
+CPU Status:${goto 100}${if_match ${cpu cpu0} > 80}${color red}HOCH (${cpu cpu0}%)${else}${if_match ${cpu cpu0} > 50}${color yellow}MITTEL (${cpu cpu0}%)${else}${color green}NORMAL (${cpu cpu0}%)${endif}${endif}$color
+
+# ==================== BLOCK 3: SPEICHER, LAUFWERKE & TOP RAM ====================
+${voffset 10}${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} Speicher$color${goto 260}${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} SSD / USB Laufwerke$color${goto 520}${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} Top RAM Prozesse$color${font}
+${color dimgrey}${hr 1}$color
+RAM $mem / $memmax${goto 200}$memperc%${goto 260}${color orange}Home $color${fs_used /home/bobelle} / ${fs_size /home/bobelle}${goto 470}${fs_used_perc /home/bobelle}%${goto 520}${top_mem name 1}${goto 710}${top_mem mem_res 1}
+${color grey}${membar 8,240}$color${goto 260}${color grey}${fs_bar 8,240 /home/bobelle}$color${goto 520}${top_mem name 2}${goto 710}${top_mem mem_res 2}
+RAM Status:${goto 100}${if_match ${memperc} > 85}${color red}KRITISCH (${memperc}%)${else}${if_match ${memperc} > 50}${color yellow}ERHÖHT (${memperc}%)${else}${color green}OPTIMAL (${memperc}%)${endif}${endif}$color${goto 260}${color orange}Data $color${fs_used /Data} / ${fs_size /Data}${goto 470}${fs_used_perc /Data}%${goto 520}${top_mem name 3}${goto 710}${top_mem mem_res 3}
+SWAP $swap / $swapmax${goto 200}$swapperc%${goto 260}${color grey}${fs_bar 8,240 /Data}$color${goto 520}${top_mem name 4}${goto 710}${top_mem mem_res 4}
+${color grey}${swapbar 8,240}$color${goto 260}${color orange}USB $color${if_mounted /media/bobelle/USB-BACKUP}${fs_used /media/bobelle/USB-BACKUP} / ${fs_size /media/bobelle/USB-BACKUP}${goto 470}${fs_used_perc /media/bobelle/USB-BACKUP}%${else}Nicht verbunden${endif}${goto 520}${top_mem name 5}${goto 710}${top_mem mem_res 5}
+${goto 260}${if_mounted /media/bobelle/USB-BACKUP}${color grey}${fs_bar 8,240 /media/bobelle/USB-BACKUP}$color${endif}${goto 520}${top_mem name 6}${goto 710}${top_mem mem_res 6}
+
+# ==================== BLOCK 4: DISK IO & CACHE ====================
+${voffset 10}${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} SSD Aktivität$color${goto 260}${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} System Details$color${goto 520}${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} System Paging$color${font}
+${color dimgrey}${hr 1}$color
+Lesen:${goto 120}${diskio_read}${goto 260}Desktop:${goto 360}${execi 3600 echo $XDG_CURRENT_DESKTOP | tr -d '\n'}${goto 520}Cached:${goto 630}$cached
+${color green}${diskiograph_read 12,240 00ff00 ff0000}$color${goto 260}Auflösung:${goto 360}${execi 3600 xrandr | grep '*' | awk '{print $1}' | head -n 1 | tr -d '\n'}${goto 520}Buffers:${goto 630}$buffers
+Schreiben:${goto 120}${diskio_write}${goto 260}Display Srv:${goto 360}${execi 3600 echo $XDG_SESSION_TYPE | tr -d '\n'}${goto 520}Swap:${goto 630}$swap / $swapmax ($swapperc%)
+${color red}${diskiograph_write 12,240 00ff00 ff0000}$color${goto 260}Caps/Num/Scr:${goto 360}${execi 2 xset q | awk '/Caps Lock:/ {print ($4=="on"?"AN":"AUS") "/" ($8=="on"?"AN":"AUS") "/" ($12=="on"?"AN":"AUS")}' | tr -d '\n'}${goto 520}RAM Nutzg.:${goto 630}$mem / $memmax ($memperc%)
+
+# ==================== BLOCK 5: NETZWERK ====================
+${voffset 10}${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} Netzwerk Status$color${goto 260}${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} Netzwerk Traffic$color${goto 520}${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} Verbindung$color${font}
+${color dimgrey}${hr 1}$color
+Signal: ${if_match ${wireless_link_qual_perc wlx002e2d3068f0} < 80}${color red}${else}${color white}${endif}${wireless_link_qual_perc wlx002e2d3068f0}%$color ${goto 100}${wireless_link_bar 8,140 wlx002e2d3068f0}${goto 260}Download:${goto 360}${downspeedf wlx002e2d3068f0} kb/s${goto 520}Interface:${goto 630}wlx002e2d3068f0
+Geräte (Netz):${goto 120}${execi 60 ip neighbor show 2>/dev/null | grep -c "REACHABLE"}${goto 260}${color green}${downspeedgraph wlx002e2d3068f0 12,240}$color${goto 520}Gesamt Down:${goto 630}${totaldown wlx002e2d3068f0}
+WLan IP:${goto 100}${addr wlx002e2d3068f0}${goto 260}Upload:${goto 360}${upspeedf wlx002e2d3068f0} kb/s${goto 520}MAC:${goto 630}${wireless_ap wlx002e2d3068f0}
+Lan Ext:${goto 100}${execi 3600 curl -s --max-time 3 ifconfig.me | tr -d '\n' || echo "Offline"}${goto 260}${color red}${upspeedgraph wlx002e2d3068f0 12,240}$color${goto 520}Gesamt Up:${goto 630}${totalup wlx002e2d3068f0}
+
+# ==================== BLOCK 6: TEMPERATUR & LÜFTER ====================
+${voffset 10}${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} Temperatur & Lüfter$color${goto 520}${color green}${font FontAwesome:size=12}${font FreeSans:bold:size=12} Hardware System$color${font}
+${color dimgrey}${hr 1}$color
+CPU Temp:${goto 90}${execi 5 sensors | grep -A 2 'k10temp' | grep 'temp1' | awk '{print $2}' | tr -d '+°C\n' | cut -d'.' -f1}°C / 70°C${goto 260}CPU Lüfter:${goto 360}${execi 5 sensors | grep -i 'fan' | head -n1 | awk '{print $2}' | tr -d '\n' || echo "N/A"} RPM${goto 520}GPU Modell:${goto 630}${execi 3600 nvidia-smi --query-gpu=gpu_name --format=csv,noheader 2>/dev/null | tr -d '\n' || echo "NVIDIA"}
+GPU Temp:${goto 90}${execi 5 nvidia-settings -q gpucoretemp -t 2>/dev/null | head -n1 | tr -d '\n' || echo "0"}°C / 95°C${goto 260}GPU Lüfter:${goto 360}${execi 5 nvidia-settings -q GPUCurrentFanSpeed -t 2>/dev/null | head -n1 | tr -d '\n' || echo "0"}% / 43%${goto 520}NVD Treiber:${goto 630}${execi 3600 nvidia-smi --query-gpu=driver_version --format=csv,noheader 2>/dev/null | tr -d '\n' || echo "N/A"}
+${goto 520}Mainboard:${goto 630}${execi 3600 cat /sys/class/dmi/id/board_name 2>/dev/null | tr -d '\n' || echo "N/A"}
+
+${voffset 10}$alignc${color orange}Design by Bobelle™$color
+]]

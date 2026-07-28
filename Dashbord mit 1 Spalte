@@ -1,0 +1,114 @@
+conky.config = {
+    background = true,
+    use_xft = true,
+    font = 'FreeSans:bold:size=9',
+    xftalpha = 1,
+    update_interval = 1.0,
+    total_run_times = 0,
+    own_window = true,
+    own_window_transparent = true,
+    own_window_type = 'desktop',
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    double_buffer = true,
+    -- BEREITE DES FENSTERS
+    minimum_width = 300,   -- Mindestbreite in Pixeln
+    maximum_width = 300,   -- Maximalbreite (wichtig: MUSS >= minimum_width sein!)
+    -- HÖHE DES FENSTERS
+    minimum_height = 100,  -- Mindesthöhe (Conky wächst bei mehr Inhalt automatisch mit)
+    draw_shades = true,
+    draw_outline = false,
+    draw_borders = false,
+    -- RÄNDER & ABSTÄNDE
+    border_inner_margin = 10, -- Innerer Abstand (Padding) vom Text zum Fensterrand
+    border_outer_margin = 0,  -- Äußerer Abstand
+    draw_graph_borders = true,
+    default_color = 'white',
+    default_shade_color = 'black',
+    default_outline_color = 'white',
+    alignment = 'top_right',
+    gap_x = -350,
+    gap_y = 30,
+    no_buffers = true,
+    uppercase = false,
+    cpu_avg_samples = 2,
+    override_utf8_locale = true,
+    own_window_argb_visual = false,
+    own_window_argb_value = 0,
+    own_window_colour = '000000',
+}
+conky.text = [[
+# Nutzer
+${font FreeSans:Bold:size=12}${color yellow}Nutzer ${hr 2}$color${font}
+O.S. $alignr Linux Mint
+Hostname $alignr $nodename
+$sysname $kernel $alignr $machine
+Systemzeit $alignr $uptime
+Paket-Updates $alignr ${execi 3600 apt-check 2>&1 | cut -d; -f1} verfügbar
+
+# CPU
+${font FreeSans:Bold:size=12}${color light green}CPU ${hr 2}$color${font}$color${font}
+AMD Athlon(tm) X4 845 Quad Core  $alignr ${freq_g cpu0}GHz
+${font}Kern 1: ${cpu cpu1}%$alignc${color green}${cpubar cpu1 10}${color}
+${font}Kern 2: ${cpu cpu2}%$alignc${color red}${cpubar cpu2 10}${color}
+${font}Kern 3: ${cpu cpu3}%$alignc${color orange}${cpubar cpu3 10}${color}
+${font}Kern 4: ${cpu cpu4}%$alignc${color yellow}${cpubar cpu4 10}${color}
+
+# Prozesse & Systemlast
+${font FreeSans:Bold:size=12}${color light green}Prozesse ${hr 2}$color${font FreeSans:bold:size=9}
+Insgesamt: $running_processes / $processes $alignr CPU-Last
+
+# Top 4 nach CPU-Auslastung
+${if_match ${top cpu 1} > 50}${color red}${else}${color white}${endif}${top name 1} $alignr ${top cpu 1} %$color
+${if_match ${top cpu 2} > 50}${color red}${else}${color white}${endif}${top name 2} $alignr ${top cpu 2} %$color
+${if_match ${top cpu 3} > 50}${color red}${else}${color white}${endif}${top name 3} $alignr ${top cpu 3} %$color
+${if_match ${top cpu 4} > 50}${color red}${else}${color white}${endif}${top name 4} $alignr ${top cpu 4} %$color
+${font FreeSans:Bold:size=10}${color light green}Top Speicher-Verbraucher${color}${font FreeSans:bold:size=9}
+${top_mem name 1} $alignr ${top_mem mem_res 1}
+${top_mem name 2} $alignr ${top_mem mem_res 2}
+${top_mem name 3} $alignr ${top_mem mem_res 3}
+
+# Speicher
+${font FreeSans:Bold:size=12}${color light green}Speicher ${hr 2}$color${font FreeSans:bold:size=9}
+RAM$font $mem / $memmax $alignr $memperc %
+${color grey}${membar 10}${color}
+${font FreeSans:bold:size=9}SWAP$font $swap / $swapmax $alignr $swapperc %
+${color grey}${swapbar 10}${color}
+
+# Laufwerk
+${font FreeSans:Bold:size=12}${color light green}SSD Laufwerk${hr 2}$color
+${color orange}${font FreeSans:bold:size=9}Home $font${fs_used /home/bobelle} / ${fs_size /home/bobelle} $alignr ${fs_used_perc /home/bobelle} %
+${color grey}${fs_bar 10 /home/bobelle}${color}
+${color orange}${font FreeSans:bold:size=9}Data $font${fs_used /Data} / ${fs_size /Data} $alignr ${fs_used_perc /Data} %
+${color grey}${fs_bar 10 /Data}${color}
+${color orange}${font FreeSans:bold:size=9}USB $font${fs_used /media/bobelle/USB-BACKUP} / ${fs_size /media/bobelle/USB-BACKUP} $alignr ${fs_used_perc /media/bobelle/USB-BACKUP} %
+${color grey}${fs_bar 10 /media/bobelle/USB-BACKUP}${color}
+
+# Festplatten-Aktivität
+${font FreeSans:Bold:size=12}${color light green}SSD Laufwerk Aktivität${hr 2}$color${font}
+${font FreeSans:bold:size=9}Lesen:$font ${diskio_read} $alignr ${font FreeSans:bold:size=9}Schreiben:$font ${diskio_write}
+${color green}${diskiograph_read 20,180 00ff00 ff0000}${color} $alignr ${color red}${diskiograph_write 20,180 00ff00 ff0000}${color}
+
+# Netzwerk
+${font FreeSans:Bold:size=12}${color light green}Netzwerk ${hr 2}$color${font}
+Signalstärke $alignr ${wireless_link_qual_perc wlx002e2d3068f0}%
+${color grey}${wireless_link_bar 8 wlx002e2d3068f0}${color}
+$color${font FreeSans:bold:size=9}WLan $font$alignr ${addr wlx002e2d3068f0}
+$color${font FreeSans:bold:size=9}Lan $font$alignr ${execi 3600 wget -q -O /dev/stdout http://checkip.dyndns.org/ | cut -d : -f 2- | cut -d \< -f -1}
+Download $alignr ${downspeedf wlx002e2d3068f0} kb/s
+${color green}${downspeedgraph wlx002e2d3068f0}${color}
+Download Gesamt $alignr ${totaldown wlx002e2d3068f0}
+Upload $alignr ${upspeedf wlx002e2d3068f0} kb/s
+${color red}${upspeedgraph wlx002e2d3068f0}${color}
+Upload Gesamt $alignr ${totalup wlx002e2d3068f0}
+
+# Temperatur CPU/GPU
+${font FreeSans:Bold:size=12}${color light green}CPU/GPU Temperatur ${hr 2}$color${font}
+CPU Temperatur $alignr ${execi 5 sensors | grep -A 2 'k10temp' | grep 'temp1' | awk '{print $2}' | tr -d '+°C' | cut -d'.' -f1}°C (${execi 5 sensors | grep -A 2 'k10temp' | grep 'temp1' | awk '{print $5}' | tr -d '+°C)' | cut -d'.' -f1}°C max)
+GPU Temperatur $alignr ${execi 5 nvidia-settings -q gpucoretemp -t}°C (80°C max)
+
+#Lüfter 
+CPU Lüfter $alignr ${execi 5 nvidia-settings -q GPUCurrentFanSpeed -t}%
+GPU Lüfter $alignr ${execi 5 nvidia-settings -q GPUCurrentFanSpeed -t}%
+
+$alignc${font FreeSans:size=7}${color light green}Design by Bobelle™$color${font}
+]]

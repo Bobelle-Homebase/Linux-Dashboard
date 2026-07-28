@@ -1,0 +1,113 @@
+conky.config = {
+    -- LUA CAIRO BINDUNG
+    lua_load = '/home/bobelle/.conky/Dashboard 4/draw_bg.lua',
+    lua_draw_hook_pre = 'draw_banners',
+
+    -- MONITORAUSWAHL & POSITIONIERUNG
+    own_window_screen = 0,
+    alignment = 'top_left',
+    gap_x = 1350,
+    gap_y = 30,
+
+    -- PERFORMANCE & SYSTEM
+    background = true,
+    update_interval = 1.0,
+    total_run_times = 0,
+    cpu_avg_samples = 2,
+    net_avg_samples = 2,
+    diskio_avg_samples = 2,
+    no_buffers = true,
+    double_buffer = true,
+    uppercase = false,
+
+    -- FENSTER-EINSTELLUNGEN
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    own_window_argb_visual = false,
+    own_window_argb_value = 0,
+    own_window_colour = '000000',
+
+    -- ABMESSUNGEN
+    minimum_width = 950,
+    maximum_width = 950,
+    minimum_height = 830,
+    border_inner_margin = 0,
+    border_outer_margin = 0,
+
+    -- SCHRIFT & DESIGN
+    use_xft = true,
+    font = 'FreeSans:bold:size=9',
+    xftalpha = 0.9,
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = false,
+    draw_graph_borders = false,
+
+    -- FARBPALETTE
+    default_color = 'white',
+    color1 = '#86BE43', -- Mint-Grün (Highlights)
+    color2 = '#A0A0A0', -- Muted Grey (Labels)
+    color3 = '#FF5555', -- Warn-Rot (Fehler/Hot)
+    color4 = '#55FF55', -- OK-Grün
+    color5 = 'orange',  -- Orange
+}
+
+conky.text = [[
+# ==================== KOPFZEILE: UHRZEIT, DATUM & WETTER ====================
+${execi 1800 curl -s --max-time 3 "de.wttr.in/Bielefeld?format=%C+%t|%w|%p" -o /tmp/wttr.txt 2>/dev/null}\
+${font Sans:size=16:bold}${color1}${time %H:%M:%S}${color}${font}  ${time %a, %d. %b %Y} ${color2}(KW ${time %V})${color}${goto 650}${color1}■ Wetter in Bielefeld$color${font}
+${color2}System:${color} ${execi 999999 lsb_release -ds | tr -d '"\n' || echo "Linux Mint"} (${kernel})${goto 650}${color white}${execi 30 cut -d'|' -f1 /tmp/wttr.txt 2>/dev/null || echo "N/A"}${color} ${color2}| Wind:${color} ${execi 30 cut -d'|' -f2 /tmp/wttr.txt 2>/dev/null || echo "N/A"}
+Design by Bobelle™$color
+
+# ==================== HARDWARE & NETZWERK ÜBERSICHT ====================
+${color1}■ HARDWARE & NETZWERK ÜBERSICHT$color
+${color2}CPU (Athlon X4):${goto 120}${color white}${cpu cpu0}%${goto 150}${color1}${cpubar cpu0 4,140}$color${goto 320}${color2}RAM:${goto 400}${color white}${memperc}%${goto 430}${color1}${membar 4,100}$color${goto 540}${color white}$mem / $memmax${goto 650}${color2}WLAN SSID:${goto 730}${color white}${execi 10 iwconfig wlx002e2d3068f0 2>/dev/null | grep 'ESSID:' | awk -F'ESSID:' '{print $2}' | tr -d '"' || echo "N/A"}
+${color2}K1:${color} ${cpu cpu0}% ${color1}${cpubar cpu0 4,45}$color ${color2}K3:${color} ${cpu cpu2}% ${color1}${cpubar cpu2 4,45}$color${goto 320}${color2}Top RAM:${goto 400}${color white}${top_mem name 1} (${top_mem mem_res 1})${goto 650}${color2}Signal:${goto 730}${color white}${if_existing /sys/class/net/wlx002e2d3068f0/operstate}${wireless_link_qual_perc wlx002e2d3068f0}% ${color1}${wireless_link_bar 4,80 wlx002e2d3068f0}$color${else}${color2}N/A$color${endif}
+${color2}K2:${color} ${cpu cpu1}% ${color1}${cpubar cpu1 4,45}$color ${color2}K4:${color} ${cpu cpu3}% ${color1}${cpubar cpu3 4,45}$color${goto 320}${color2}System (/):${goto 400}${color white}${fs_used /} / ${fs_size /}${goto 540}${color1}${fs_bar 4,80 /}$color${goto 650}${color2}IP Adr.:${goto 730}${color white}${if_existing /sys/class/net/wlx002e2d3068f0/operstate}${addr wlx002e2d3068f0}${else}N/A${endif}
+${color2}Top CPU:${goto 90}${color white}${top name 1} (${top cpu 1}%)${goto 320}${color2}Home:${goto 400}${color white}${fs_used /home/bobelle} / ${fs_size /home/bobelle}${goto 540}${color1}${fs_bar 4,80 /home/bobelle}$color${goto 650}${color2}Speed (D/U):${goto 730}${color white}${if_existing /sys/class/net/wlx002e2d3068f0/operstate}${downspeedf wlx002e2d3068f0} / ${upspeedf wlx002e2d3068f0} kb/s${else}N/A${endif}
+${voffset 4}${color2}GPU (GTX 750 Ti):${goto 120}${color white}${execi 5 nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits 2>/dev/null || echo "0"}%${goto 150}${color1}${execibar 5 4,140 nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits 2>/dev/null || echo "0"}$color${goto 320}${if_mounted /Data}${color2}HDD (/Data):${goto 400}${color white}${fs_used /Data} / ${fs_size /Data}${goto 540}${color1}${fs_bar 4,80 /Data}$color${endif}${goto 650}${color2}Traffic Graph:${goto 730}${color1}${if_existing /sys/class/net/wlx002e2d3068f0/operstate}${downspeedgraph wlx002e2d3068f0 12,120 86BE43 555555}$color${else}N/A${endif}
+${color2}GPU Temp/Power:${goto 120}${color white}${execi 5 nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits 2>/dev/null || echo "0"} °C${color2} / ${color white}${execi 5 nvidia-smi --query-gpu=power.draw --format=csv,noheader 2>/dev/null || echo "N/A"}${goto 320}${color2}HDD Status:${goto 400}${color white}${execi 30 udisksctl info -b /dev/sdb 2>/dev/null | grep -i 'SmartTemperature:' | awk '{if($2>0) print int($2-273.15) "°C"; else print "32 °C"}'}${goto 540}${color2}SMART:${goto 590}${color1}PASSED (OK)$color
+
+# ==================== UNTERE ZEILE: SYSTEM HEALTH & GAMING ====================
+${color2}Laufzeit:${goto 80}${color white}$uptime${color}${goto 240}${color2}Updates:${goto 300}${if_match "${execi 300 apt list --upgradable 2>/dev/null | grep -c 'upgradable'}" > "0"}${color1}${execi 300 apt list --upgradable 2>/dev/null | grep -c 'upgradable'} Verfügbar$color${else}${color white}0 (Aktuell)${endif}${goto 480}${color2}0 A.D. Game:${goto 570}${if_running pyrogenesis}${color1}Aktiv (Läuft)$color${else}${color2}Inaktiv$color${endif}${goto 700}${color2}${goto 700}${color2}System Status:${goto 800}${if_match "${execi 60 systemctl is-system-running 2>/dev/null | grep -E 'running|degraded' | wc -l}" > "0"}${color4}Alles OK$color${else}${color3}Fehler!$color${endif}
+# ==================== AUDIO & PROZESS-STATUS ====================
+${color2}Lautstärke:${goto 100}${color white}${execi 1 amixer get Master 2>/dev/null | grep -o -m 1 '[0-9]*%' || echo "N/A"}${goto 200}${color1}${execibar 1 4,120 amixer get Master 2>/dev/null | grep -o -m 1 '[0-9]*' || echo "0"}$color${goto 480}${color2}Prozesse Ges.:${goto 590}${color white}$processes${goto 700}${color2}Aktiv:${goto 760}${color white}$running_processes${color}
+${color2}Num-Lock:${goto 95} ${if_match "${exec cat /sys/class/leds/*numlock*/brightness 2>/dev/null | head -n1 || echo 0}" == "1"}${color1} AN $color${else}${color2} AUS $color${endif}${goto 200}${color2}Caps-Lock: ${if_match "${exec cat /sys/class/leds/*capslock*/brightness 2>/dev/null | head -n1 || echo 0}" == "1"}${color3} AN $color${else}${color2} AUS $color${endif}
+
+# ==================== SPEICHERMEDIEN & DISK HEALTH ====================
+${color1}■ LAUFWERKE & FESTPLATTEN-DETAILS$color
+${color2}System (/):${goto 110}${color white}${fs_used /} / ${fs_size /} (${fs_type /})${goto 350}${color2}Frei:${goto 390}${color white}${fs_free /}${goto 480}${color2}Read/Write:${goto 580}${color white}R: ${diskio_read /dev/sda} | W: ${diskio_write /dev/sda}
+${if_mounted /Data}${color2}HDD (/Data):${goto 110}${color white}${fs_used /Data} / ${fs_size /Data} (${fs_type /Data})${goto 350}${color2}Frei:${goto 390}${color white}${fs_free /Data}${goto 480}${color2}Read/Write:${goto 580}${color white}R: ${diskio_read /dev/sdb} | W: ${diskio_write /dev/sdb}
+${color2}HDD Temp:${goto 110}${color white}${execi 30 udisksctl info -b /dev/sdb 2>/dev/null | grep -i 'SmartTemperature:' | awk '{if($2>0) print int($2-273.15) "°C"; else print "32 °C"}'}${goto 220}${color2}SMART:${goto 280}${color1}PASSED (OK)$color${goto 480}${color2}Status:${goto 580}${color white}Aktiv$color${endif}
+
+# ==================== CLOUD SPEICHER & SYNCHRONISATION ====================
+${voffset 4}${color1}■ CLOUD SPEICHER & SYNCHRONISATION$color
+${color2}Nextcloud:${goto 100}${if_match "${execi 10 pgrep -x nextcloud | wc -l}" > "0"}${color1}● Synced$color${else}${color3}○ Inaktiv$color${endif}${goto 180}${color white}${execi 1800 du -sh /home/bobelle/Nextcloud 2>/dev/null | cut -f1 || echo "0 B"}${goto 240}${color2}(${execi 1800 find /home/bobelle/Nextcloud -maxdepth 2 -type f 2>/dev/null | wc -l} Dateien)${goto 410}${color2}Google Drive:${goto 520}${if_match "${execi 10 pgrep -f 'rclone.*google' | wc -l}" > "0"}${color1}● Mount$color${else}${color3}○ Inaktiv$color${endif}${goto 600}${color white}${execi 1800 du -sh /home/bobelle/GoogleDrive 2>/dev/null | cut -f1 || echo "0 B"}${goto 660}${color2}(${execi 1800 find /home/bobelle/GoogleDrive -maxdepth 2 -type f 2>/dev/null | wc -l} Dateien)
+${color dimgrey}${execibar 1800 4,350 du -sb /home/bobelle/Nextcloud 2>/dev/null | awk '{print int($1/1073741824*100/15)}' || echo "0"}$color${goto 410}${color dimgrey}${execibar 1800 4,350 du -sb /home/bobelle/GoogleDrive 2>/dev/null | awk '{print int($1/1073741824*100/15)}' || echo "0"}$color
+${color2}Letzter Sync:${goto 100}${color white}${execi 60 ls -ld --time-style=+"%H:%M" /home/bobelle/Nextcloud 2>/dev/null | awk '{print $6}' || echo "N/A"}${goto 410}${color2}Letzter Sync:${goto 520}${color white}${execi 60 ls -ld --time-style=+"%H:%M" /home/bobelle/GoogleDrive 2>/dev/null | awk '{print $6}' || echo "N/A"}
+${voffset 4}${color2}Dropbox:${goto 100}${if_match "${execi 10 pgrep -x dropbox | wc -l}" > "0"}${color1}● Synced$color${else}${color3}○ Inaktiv$color${endif}${goto 180}${color white}${execi 1800 du -sh /home/bobelle/Dropbox 2>/dev/null | cut -f1 || echo "0 B"}${goto 240}${color2}(${execi 1800 find /home/bobelle/Dropbox -maxdepth 2 -type f 2>/dev/null | wc -l} Dateien)${goto 410}${color2}Mega Cloud:${goto 520}${if_match "${execi 10 pgrep -x megasync | wc -l}" > "0"}${color1}● Synced$color${else}${color3}○ Inaktiv$color${endif}${goto 600}${color white}${execi 1800 du -sh /home/bobelle/MEGAsync 2>/dev/null | cut -f1 || echo "0 B"}${goto 660}${color2}(${execi 1800 find /home/bobelle/MEGAsync -maxdepth 2 -type f 2>/dev/null | wc -l} Dateien)
+${color dimgrey}${execibar 1800 4,350 du -sb /home/bobelle/Dropbox 2>/dev/null | awk '{print int($1/1073741824*100/2)}' || echo "0"}$color${goto 410}${color dimgrey}${execibar 1800 4,350 du -sb /home/bobelle/MEGAsync 2>/dev/null | awk '{print int($1/1073741824*100/20)}' || echo "0"}$color
+${color2}Letzter Sync:${goto 100}${color white}${execi 60 ls -ld --time-style=+"%H:%M" /home/bobelle/Dropbox 2>/dev/null | awk '{print $6}' || echo "N/A"}${goto 410}${color2}Letzter Sync:${goto 520}${color white}${execi 60 ls -ld --time-style=+"%H:%M" /home/bobelle/MEGAsync 2>/dev/null | awk '{print $6}' || echo "N/A"}
+
+# ==================== USB HARDWARE ÜBERSICHT ====================
+${voffset 10}${color #86BE43}${font FontAwesome:size=11}${font FreeSans:bold:size=10}  ANGESCHLOSSENE USB-GERÄTE ($color${execi 10 lsusb | grep -v "Linux Foundation" | wc -l} extern$color${color #86BE43})$color${font}
+${color #333333}${hr 1}$color
+${if_match "${execi 15 lsusb | grep -v 'Linux Foundation' | sed -n '1p'}" != ""}${color #86BE43}USB 01:$color ${color white}${execi 15 lsusb | grep -v 'Linux Foundation' | awk '{for(i=7;i<=NF;i++) printf $i " "; print ""}' | sed -n '1p' | cut -c1-18}${endif}${goto 270}${if_match "${execi 15 lsusb | grep -v 'Linux Foundation' | sed -n '3p'}" != ""}${color #86BE43}USB 03:$color ${color white}${execi 15 lsusb | grep -v 'Linux Foundation' | awk '{for(i=7;i<=NF;i++) printf $i " "; print ""}' | sed -n '3p' | cut -c1-18}${endif}${goto 540}${if_match "${execi 15 lsusb | grep -v 'Linux Foundation' | sed -n '5p'}" != ""}${color #86BE43}USB 05:$color ${color white}${execi 15 lsusb | grep -v 'Linux Foundation' | awk '{for(i=7;i<=NF;i++) printf $i " "; print ""}' | sed -n '5p' | cut -c1-18}${endif}
+${if_match "${execi 15 lsusb | grep -v 'Linux Foundation' | sed -n '2p'}" != ""}${color #86BE43}USB 02:$color ${color white}${execi 15 lsusb | grep -v 'Linux Foundation' | awk '{for(i=7;i<=NF;i++) printf $i " "; print ""}' | sed -n '2p' | cut -c1-18}${endif}${goto 270}${if_match "${execi 15 lsusb | grep -v 'Linux Foundation' | sed -n '4p'}" != ""}${color #86BE43}USB 04:$color ${color white}${execi 15 lsusb | grep -v 'Linux Foundation' | awk '{for(i=7;i<=NF;i++) printf $i " "; print ""}' | sed -n '4p' | cut -c1-18}${endif}${goto 540}${if_match "${execi 15 lsusb | grep -v 'Linux Foundation' | sed -n '6p'}" != ""}${color #86BE43}USB 06:$color ${color white}${execi 15 lsusb | grep -v 'Linux Foundation' | awk '{for(i=7;i<=NF;i++) printf $i " "; print ""}' | sed -n '6p' | cut -c1-18}${endif}
+
+# ==================== GAMING WORLD ====================
+${voffset 4}${color1}■ Gaming World$color
+${color #333333}${hr 1}$color
+${color2}Leitstellenspiel:${goto 105}${if_match "${execi 5 xwininfo -root -children 2>/dev/null | grep -i 'leitstellenspiel' | wc -l}" > "0"}${color1}o.K läuft$color${else}${color2}Inaktiv$color${endif}${goto 270}${color2}Rettungssimulator:${goto 390}${if_match "${execi 5 xwininfo -root -children 2>/dev/null | grep -i 'rettungssimulator' | wc -l}" > "0"}${color1}o.K läuft$color${else}${color2}Inaktiv$color${endif}${goto 540}${color2}0 A.D. Game:${goto 625}${if_running pyrogenesis}${color1}o.K läuft$color${else}${color2}Inaktiv$color${endif}
+${goto 700}${color2}
+
+# ==================== Cloud ÜBERSICHT ====================
+${voffset 4}${color1}■ Cloud ÜBERSICHT
+${color #333333}${hr 1}$color
+${color white}Nextcloud:${color} ${goto 120}${if_running nextcloud}${color green}● Aktiv${else}${color red}○ Inaktiv${endif}${color } ${goto 220}(398 Dateien) ${goto 380}${color white}Google Drive:${color green} ${goto 500}${execi 5 gio mount -l 2>/dev/null | grep -q -i google && echo "● Mount" || echo"○ Inaktiv"}${color} ${goto 620}(398 Dateien)
+${color white}Letzter Sync: ${goto 120}${exec date -r /home/bobelle/Nextcloud "+%d.%m.%Y %H:%M"} ${goto 380}${color white}Letzter Sync:${color} ${goto 500}${execi 10 D=$(ls -d /run/user/1000/gvfs/google-drive* 2>/dev/null); if [ -n "$D" ]; then date -r "$D" "+%d.%m.%Y %H:%M"; else echo "Inaktiv"; fi}
+${color white}Dropbox:${color} ${goto 120}${if_running dropbox}${color green}● Aktiv${color}${else}${color red}○ Inaktiv${color}${endif} ${goto 220}(373 Dateien) ${goto 380}${color white}Mega Cloud:${color} ${goto 500}${if_running megasync}${color green}● Aktiv${else}${color red}○ Inaktiv${endif}${color} ${goto 620}(465 Dateien)
+${color white}Letzter Sync:${color} ${goto 120}${exec date -r /home/bobelle/Dropbox "+%d.%m.%Y %H:%M"} ${goto 380}${color white}Letzter Sync:${color} ${goto 500}${exec date -r /home/bobelle "+%d.%m.%Y %H:%M"}
+]]
